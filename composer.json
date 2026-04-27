@@ -1,6 +1,6 @@
 {
     "name": "raham/php-pipe",
-    "description": "This package adds the pipe operator",
+    "description": "This package adds the pipe operator in Laravel",
     "type": "library",
     "license": "mit",
     "autoload": {
