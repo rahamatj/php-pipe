@@ -2,20 +2,17 @@
 
 use Illuminate\Support\Str;
 
-function pipe($str)
+function pipe($input, $pipes)
 {
-    $commands = explode("|", $str);
+    $commands = explode("|", $pipes);
 
     // first item is input
-    $value = trim(array_shift($commands));
+    $input = trim($input);
 
     foreach ($commands as $command) {
-
         $command = trim($command);
-
-        // $value = 'Str::' . $command . '($value)';
-        $value = call_user_func([Str::class, $command], $value);
+        $result = call_user_func([Str::class, $command], $result);
     }
 
-    return $value;
+    return $result;
 }

@@ -7,4 +7,4 @@
 - Can work with any Laravel Str facade. Just leave out the 'Str::' part.
 
 ## Example
-```echo pipe("Hello World | snake | upper")```
+```echo pipe("Hello World", "snake | upper")```
