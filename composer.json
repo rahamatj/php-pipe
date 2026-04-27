@@ -1,0 +1,29 @@
+{
+    "name": "raham/php-pipe",
+    "description": "This package adds the pipe operator",
+    "type": "library",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "Raham\\PhpPipe\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Rahamat Jahan",
+            "email": "rahamatj92@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Raham\\PhpPipe\\PhpPipeServiceProvider"
+            ]
+        }
+    },
+    "require": {}
+}
