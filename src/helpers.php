@@ -4,10 +4,10 @@ use Illuminate\Support\Str;
 
 function pipe($input, $pipes)
 {
-    $commands = explode("|", $pipes);
-
     // first item is input
     $input = trim($input);
+
+    $commands = explode("|", $pipes);
 
     foreach ($commands as $command) {
         $command = trim($command);
