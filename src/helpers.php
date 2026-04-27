@@ -4,8 +4,7 @@ use Illuminate\Support\Str;
 
 function pipe($input, $pipes)
 {
-    $input = trim($input);
-
+    $result = trim($input);
     $commands = explode("|", $pipes);
 
     foreach ($commands as $command) {
