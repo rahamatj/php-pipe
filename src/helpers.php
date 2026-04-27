@@ -4,7 +4,6 @@ use Illuminate\Support\Str;
 
 function pipe($input, $pipes)
 {
-    // first item is input
     $input = trim($input);
 
     $commands = explode("|", $pipes);
