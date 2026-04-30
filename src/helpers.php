@@ -11,6 +11,14 @@ function pipe($input, $pipes)
     foreach ($commands as $command) {
         $command = trim($command);
 
+        [$command, $limit] = explode(":", $command) + [1 => null];
+
+        if ($limit !== null) {
+            $limit = (int) $limit;
+
+            $result = call_user_func([Str::class, $command], $result, $limit);
+        }
+
         $result = call_user_func([Str::class, $command], $result);
     }
 
