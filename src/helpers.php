@@ -11,6 +11,12 @@ function pipe($input, $pipes)
     foreach ($commands as $command) {
         $command = trim($command);
 
+        if (function_exists($command)) {
+            $result = $command($result);
+
+            continue;
+        }
+
         [$command, $limit] = explode(":", $command) + [1 => null];
 
         if ($limit !== null) {

@@ -4,7 +4,7 @@
 - ```composer create-project laravel/laravel project```
 - ```cd project```
 - ```composer require raham/php-pipe```
-- Can work with any Laravel Str facade methods. Just leave out the 'Str::' part.
+- Works with PHP builtin functions, Laravel Str facade methods (Just leave out the 'Str::' part) and custom functions.
 
 ## Example
 ```echo pipe("Hello World", "snake | upper")```
