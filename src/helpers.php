@@ -2,30 +2,40 @@
 
 use Illuminate\Support\Str;
 
-function pipe($input, $pipes)
+function pipe($input, ...$args)
 {
-    $commands = explode("|", $pipes);
-
     $result = trim($input);
 
-    foreach ($commands as $command) {
-        $command = trim($command);
-
-        if (function_exists($command)) {
-            $result = $command($result);
-
-            continue;
+    foreach ($args as $key => $value) {
+        if (is_int($key)) {
+            // positional argument, treat as string command
+            $commands = explode("|", $value);
+            foreach ($commands as $command) {
+                $command = trim($command);
+                [$method, $param] = explode(":", $command) + [1 => null];
+                if (function_exists($method)) {
+                    if ($param !== null) {
+                        $result = $method($result, $param);
+                    } else {
+                        $result = $method($result);
+                    }
+                } else {
+                    if ($param !== null) {
+                        $param = (int) $param;
+                        $result = call_user_func([Str::class, $method], $result, $param);
+                    } else {
+                        $result = call_user_func([Str::class, $method], $result);
+                    }
+                }
+            }
+        } else {
+            // named argument, $key is method, $value is param
+            if (function_exists($key)) {
+                $result = $key($result, $value);
+            } else {
+                $result = call_user_func([Str::class, $key], $result, (int) $value);
+            }
         }
-
-        [$command, $limit] = explode(":", $command) + [1 => null];
-
-        if ($limit !== null) {
-            $limit = (int) $limit;
-
-            $result = call_user_func([Str::class, $command], $result, $limit);
-        }
-
-        $result = call_user_func([Str::class, $command], $result);
     }
 
     return $result;
